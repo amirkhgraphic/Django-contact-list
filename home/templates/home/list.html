@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load crispy_forms_tags %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+{% endblock %}
+
+{% block title %}Contacts List{% endblock %}
+
+{% block content %}
+    <h1 id="title">List of Contacts</h1>
+
+    <input id="search-input" autocomplete="off" type="text" aria-label="search-input" placeholder="Enter your contact's name...">
+
+    <div id="card-container">
+        {% for contact in contacts %}
+            <div class="card" id="rem{{ contact.id }}">
+              <div class="card-body">
+                <h5 class="card-title">{{ contact.first_name }} {{ contact.last_name }}</h5>
+                <p class="card-text">{{ contact.country }}, {{ contact.city }}, {{ contact.address }}</p>
+                <p>{{ contact.country_code }} {{ contact.phone_number }}</p>
+                <p>{{ contact.created_time }}</p>
+                <button class="btn btn-danger" id="{{ contact.id }}">Remove</button>
+                <a href="/phone-list/{{ contact.id }}/update/"><button class="btn btn-secondary">Edit</button></a>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    {% load static %}
+    <script src="{% static 'home/delete.js' %}"></script>
+    <script src="{% static 'home/fill.js' %}"></script>
+    <script src="{% static 'home/modal.js' %}"></script>
+{% endblock %}

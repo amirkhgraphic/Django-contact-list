@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load crispy_forms_tags %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+{% endblock %}
+
+{% block title %}Contacts List{% endblock %}
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}
